@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Activation page</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
     <h1>Your account successfully activated</h1>
     <p>Thank you for activating account. Now you can <a href="http://localhost:8000/account/login">login</a> and
         browse our <a href="http://localhost:8000/main">site</a></p>
-</body>
-</html>
+{% endblock content %}

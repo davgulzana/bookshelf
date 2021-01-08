@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid tm-container-content tm-mt-60">
+        <div class="row mb-4">
+            <h2 class="col-12 tm-text-primary">{{ book.title }}</h2>
+        </div>
+        <div class="row tm-mb-90">            
+            <div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
+                <img src="{{ book.images.first.get_absolute_image_url }}" alt="Image" class="img-fluid">
+            </div>
+            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
+                <div class="tm-bg-gray tm-video-details">
+                    <div class="mb-4 d-flex flex-wrap">
+                        <div class="mr-4 mb-2">
+                            <span class="tm-text-gray-dark">Published: </span><span class="tm-text-primary">{{ book.published }}</span>
+                        </div>
+                        <div class="mr-4 mb-2">
+                            <span class="tm-text-gray-dark">Pages: </span><span class="tm-text-primary">{{ book.pages }}</span>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="tm-text-gray-dark mb-3">{{ book.author }}</h3>
+                        <p>{{ book.author.biography }}</p>
+                    </div>
+                    <div>
+                        <h3 class="tm-text-gray-dark mb-3">Genre</h3>
+                        {% for genre in book.genre.all %}
+                        <a href="#" class="tm-text-primary mr-4 mb-2 d-inline-block">{{ genre.title }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- container-fluid, tm-container-content -->
+{% endblock content %}

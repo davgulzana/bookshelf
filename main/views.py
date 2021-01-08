@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 
-# Create your views here.
+from main.models import Book
+
+
+class BooksListView(ListView):
+    paginate_by = 2
+    model = Book
+    template_name = 'main/index.html'
+
+
+class BookDetailView(DetailView):
+    model = Book
+    template_name = 'main/detail.html'

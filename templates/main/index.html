@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid tm-container-content tm-mt-60">
+        <div class="row mb-4">
+            <h2 class="col-6 tm-text-primary">
+                Latest Books
+            </h2>
+            <div class="col-6 d-flex justify-content-end align-items-center">
+                <form action="" class="tm-text-primary">
+                    Page <input type="text" value="{{ page_obj.number }}" size="1" class="tm-input-paging tm-text-primary"> of {{ page_obj.paginator.num_pages }}
+                </form>
+            </div>
+        </div>
+        <div class="row tm-mb-90 tm-gallery">
+            {% for book in book_list %}
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                    <h3 class="tm-text-primary mb-4 tm-footer-title">
+                        {{ book.title }}
+                    </h3>
+                    <figure class="effect-ming tm-video-item">
+                        <img src="{{ book.images.first.get_absolute_image_url }}" alt="Image" class="img-fluid">
+                        <figcaption class="d-flex align-items-center justify-content-center">
+                            <h2>{{ book.title }}</h2>
+                            <a href="{% url 'detail' pk=book.id %}">View more</a>
+                        </figcaption>
+                    </figure>
+                    <div class="d-flex justify-content-between tm-text-gray">
+                        <span class="tm-text-gray-light">hhh</span>
+                        <span>author: {{ book.author }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div> <!-- row -->
+        <div class="row tm-mb-90">
+            <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary tm-btn-prev mb-2 disabled">Previous</a>
+                {% endif %}
+                <div class="tm-paging d-flex">
+                    {% for i in paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <a href="" class="active tm-paging-link">{{ i }}</a>
+                    {% else %}
+                        <a href="?page={{ i }}" class="tm-paging-link">{{i}}</a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary tm-btn-next">Next Page</a>
+                {% endif %}
+            </div>            
+        </div>
+    </div> <!-- container-fluid, tm-container-content -->
+    {% endblock content %}
+
